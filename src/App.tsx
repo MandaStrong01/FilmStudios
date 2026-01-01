@@ -1,0 +1,18 @@
+[plugin:vite:import-analysis] Failed to resolve import "./pages/Page1" from "src/App.tsx". Does the file exist?
+/home/project/src/App.tsx:4:18
+16 |  }
+17 |  import { HashRouter, Routes, Route } from "react-router-dom";
+18 |  import Page1 from "./pages/Page1";
+   |                     ^
+19 |  import MediaLibrary from "./pages/MediaLibrary";
+20 |  import Page11 from "./pages/Page11";
+    at TransformPluginContext._formatError (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49242:41)
+    at TransformPluginContext.error (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49237:16)
+    at normalizeUrl (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64033:23)
+    at async eval (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64165:39)
+    at async TransformPluginContext.transform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64092:7)
+    at async PluginContainer.transform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49083:18)
+    at async loadAndTransform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:51916:27)
+    at async viteTransformMiddleware (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:61873:24
+Click outside, press Esc key, or fix the code to dismiss.
+You can also disable this overlay by setting server.hmr.overlay to false in vite.config.ts.
