@@ -1,18 +1,88 @@
-[plugin:vite:import-analysis] Failed to resolve import "./pages/Page1" from "src/App.tsx". Does the file exist?
-/home/project/src/App.tsx:4:18
-16 |  }
-17 |  import { HashRouter, Routes, Route } from "react-router-dom";
-18 |  import Page1 from "./pages/Page1";
-   |                     ^
-19 |  import MediaLibrary from "./pages/MediaLibrary";
-20 |  import Page11 from "./pages/Page11";
-    at TransformPluginContext._formatError (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49242:41)
-    at TransformPluginContext.error (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49237:16)
-    at normalizeUrl (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64033:23)
-    at async eval (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64165:39)
-    at async TransformPluginContext.transform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:64092:7)
-    at async PluginContainer.transform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:49083:18)
-    at async loadAndTransform (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:51916:27)
-    at async viteTransformMiddleware (file:///home/project/node_modules/vite/dist/node/chunks/dep-CDnG8rE7.js:61873:24
-Click outside, press Esc key, or fix the code to dismiss.
-You can also disable this overlay by setting server.hmr.overlay to false in vite.config.ts.
+import { useState } from "react";
+import Page11 from "./pages/Page11";
+
+const SimplePage = ({ title }: { title: string }) => (
+  <div style={{ padding: 40 }}>
+    <h1 style={{ color: "#b388ff" }}>{title}</h1>
+    <p>MandaStrong Studios 2025</p>
+  </div>
+);
+
+export default function App() {
+  const [page, setPage] = useState<number>(1);
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0b0618", color: "white" }}>
+      
+      {/* TOP-RIGHT MENU */}
+      <div
+        style={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          display: "grid",
+          gridTemplateColumns: "repeat(5, auto)",
+          gap: 6,
+          zIndex: 1000,
+        }}
+      >
+        {Array.from({ length: 21 }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            style={{
+              background: page === i + 1 ? "#b388ff" : "#1c1238",
+              color: "white",
+              border: "none",
+              padding: "6px 10px",
+              borderRadius: 6,
+              cursor: "pointer",
+              fontSize: 12,
+            }}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+
+      {/* PAGE CONTENT */}
+      <div style={{ paddingTop: 80 }}>
+        {page === 1 && <SimplePage title="Page 1 – Welcome / Background Video" />}
+        {page === 2 && <SimplePage title="Page 2 – Getting Started" />}
+        {page === 3 && <SimplePage title="Page 3 – Tool Board" />}
+        {page === 4 && <SimplePage title="Page 4 – Script Tools" />}
+        {page === 5 && <SimplePage title="Page 5 – Storyboards" />}
+        {page === 6 && <SimplePage title="Page 6 – Scene Builder" />}
+        {page === 7 && <SimplePage title="Page 7 – Character Creator" />}
+        {page === 8 && <SimplePage title="Page 8 – Audio Tools" />}
+        {page === 9 && <SimplePage title="Page 9 – Video Tools" />}
+        {page === 10 && <SimplePage title="Page 10 – Upload Doxy Movie" />}
+        {page === 11 && <Page11 />}
+        {page === 12 && <SimplePage title="Page 12 – Timeline Editor" />}
+        {page === 13 && <SimplePage title="Page 13 – Effects & Transitions" />}
+        {page === 14 && <SimplePage title="Page 14 – Music & Sound" />}
+        {page === 15 && <SimplePage title="Page 15 – Voice & Lip Sync" />}
+        {page === 16 && <SimplePage title="Page 16 – Legal / Disclaimers" />}
+        {page === 17 && <SimplePage title="Page 17 – Terms & Safety" />}
+        {page === 18 && <SimplePage title="Page 18 – Community Hub" />}
+        {page === 19 && <SimplePage title="Page 19 – Projects" />}
+        {page === 20 && <SimplePage title="Page 20 – Export Movie" />}
+        {page === 21 && <SimplePage title="Page 21 – Video Demo / User Guide" />}
+      </div>
+
+      {/* FOOTER (from Page 3 onward) */}
+      {page >= 3 && (
+        <footer
+          style={{
+            marginTop: 120,
+            padding: 20,
+            textAlign: "center",
+            color: "#777",
+          }}
+        >
+          © 2025 MandaStrong Studios
+        </footer>
+      )}
+    </div>
+  );
+}
