@@ -9,14 +9,10 @@ import {
   Sliders, 
   Layers, 
   Sparkles, 
-  Clock, 
-  Upload,
+  Clock,
   Play,
   Pause,
-  Volume2,
-  Type,
-  Download,
-  X
+  Volume2
 } from 'lucide-react';
 
 /* =========================
@@ -412,7 +408,6 @@ function VideoStudio() {
 
       <div className="max-w-7xl mx-auto p-6 space-y-6">
         
-        {/* Duration Slider */}
         <div className="card">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-2xl font-bold text-purple-400">Authorized Duration</h3>
@@ -432,7 +427,6 @@ function VideoStudio() {
           </div>
         </div>
 
-        {/* Video Viewer */}
         <div className="card">
           <div className="aspect-video bg-black rounded-lg overflow-hidden mb-4 relative">
             <video ref={videoRef} className="w-full h-full object-contain">
@@ -452,159 +446,4 @@ function VideoStudio() {
             <button onClick={togglePlayPause} className="p-3 bg-purple-600 rounded-lg">
               {isPlaying ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
             </button>
-            <div className="flex items-center gap-2 flex-1">
-              <Volume2 className="w-5 h-5" />
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                onChange={(e) => setVolume(Number(e.target.value))}
-                className="flex-1 h-2 bg-purple-950/50 rounded-lg"
-              />
-            </div>
-            <div className="flex gap-2">
-              {['16:9', '4:3', '1:1', '9:16'].map((ratio) => (
-                <button
-                  key={ratio}
-                  onClick={() => setAspectRatio(ratio)}
-                  className={`px-3 py-2 rounded-lg text-sm ${
-                    aspectRatio === ratio ? 'bg-purple-600' : 'bg-purple-950/50'
-                  }`}
-                >
-                  {ratio}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Filters & Text */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="card">
-            <h3 className="text-2xl font-bold text-purple-400 mb-4">Filters</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {filters.map((filter) => (
-                <button
-                  key={filter.name}
-                  onClick={() => setSelectedFilter(filter.name)}
-                  className={`p-3 rounded-lg ${
-                    selectedFilter === filter.name ? 'bg-purple-600' : 'bg-purple-950/50'
-                  }`}
-                >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
-            {selectedFilter && (
-              <div className="mt-4">
-                <label className="text-sm">Intensity: {filterIntensity}%</label>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={filterIntensity}
-                  onChange={(e) => setFilterIntensity(Number(e.target.value))}
-                  className="w-full h-2 bg-purple-950/50 rounded-lg"
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="card">
-            <h3 className="text-2xl font-bold text-purple-400 mb-4">Text Overlay</h3>
-            <input
-              type="text"
-              value={textOverlay}
-              onChange={(e) => setTextOverlay(e.target.value)}
-              placeholder="Enter text..."
-              className="w-full bg-black border border-purple-700 rounded-lg px-4 py-3 mb-3"
-            />
-            <div className="flex gap-3">
-              <input
-                type="color"
-                value={textColor}
-                onChange={(e) => setTextColor(e.target.value)}
-                className="w-16 h-12 bg-black border border-purple-700 rounded-lg"
-              />
-              <div className="flex-1">
-                <label className="text-sm">Size: {fontSize}px</label>
-                <input
-                  type="range"
-                  min="20"
-                  max="120"
-                  value={fontSize}
-                  onChange={(e) => setFontSize(Number(e.target.value))}
-                  className="w-full h-2 bg-purple-950/50 rounded-lg"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Controls */}
-        <div className="flex justify-between items-center card">
-          <button onClick={() => navigate('/page11')} className="primary-btn">
-            <ArrowLeft className="w-5 h-5 inline mr-2" />
-            Back
-          </button>
-
-          <button
-            onClick={handleGenerate}
-            disabled={isGenerating}
-            className="px-12 py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-black rounded-xl disabled:opacity-50"
-          >
-            {isGenerating ? 'Generating...' : 'Generate'}
-          </button>
-
-          <button onClick={() => navigate('/editor')} className="primary-btn">
-            Next
-            <ArrowRight className="w-5 h-5 inline ml-2" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* =========================
-   APP ROUTER (FINAL)
-========================= */
-export default function App() {
-  return (
-    <HashRouter>
-      <Routes>
-
-        <Route path="/" element={<Page1 />} />
-        <Route path="/page1" element={<Page1 />} />
-        <Route path="/page2" element={<Page2 />} />
-
-        <Route path="/media" element={<MediaLibrary />} />
-        <Route path="/editor" element={<EditorSuite />} />
-        <Route path="/video-studio" element={<VideoStudio />} />
-
-        <Route path="/page3" element={<Page title="Page 3" subtitle="Getting Started" />} />
-        <Route path="/page4" element={<Page title="Page 4" subtitle="AI Tool Board" />} />
-        <Route path="/page5" element={<Page title="Page 5" subtitle="Script Tools" />} />
-        <Route path="/page6" element={<Page title="Page 6" subtitle="Storyboards" />} />
-        <Route path="/page7" element={<Page title="Page 7" subtitle="Scene Builder" />} />
-        <Route path="/page8" element={<Page title="Page 8" subtitle="Character Creator" />} />
-        <Route path="/page9" element={<Page title="Page 9" subtitle="Audio Tools" />} />
-        <Route path="/page10" element={<Page title="Page 10" subtitle="Video Tools" />} />
-        <Route path="/page11" element={<Page11 />} />
-        <Route path="/page12" element={<Page title="Page 12" subtitle="Movie Library" />} />
-        <Route path="/page13" element={<Page title="Page 13" subtitle="Timeline Editor" />} />
-        <Route path="/page14" element={<Page title="Page 14" subtitle="Effects & Transitions" />} />
-        <Route path="/page15" element={<Page title="Page 15" subtitle="Music & Sound" />} />
-        <Route path="/page16" element={<Page title="Page 16" subtitle="Voice & Lip Sync" />} />
-        <Route path="/page17" element={<Page title="Page 17" subtitle="Legal / Disclaimers" />} />
-        <Route path="/page18" element={<Page title="Page 18" subtitle="Terms & Safety" />} />
-        <Route path="/page19" element={<Page title="Page 19" subtitle="Community Hub" />} />
-        <Route path="/page20" element={<Page title="Page 20" subtitle="Projects" />} />
-        <Route path="/page21" element={<Page title="Page 21" subtitle="Export Movie" />} />
-
-      </Routes>
-    </HashRouter>
-  );
-}
+            <div className="flex items-center gap-2
